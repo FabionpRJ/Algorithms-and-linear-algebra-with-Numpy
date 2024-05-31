@@ -1,6 +1,6 @@
 import numpy as np
 
-# This File is responsible for armazain my linear algebra algorithms
+# This file is responsible for storing my linear algebra algorithms
 #
 
 
@@ -47,3 +47,28 @@ def back_substitution(upper_matrix, solution):
         value = 0                                               #resets the values...
     return vector_y
     
+
+
+
+#---------------------------------------------- GAUSSIAN ELIMINATION --------------------------------
+# Decompose Matrices in Upper and Lower Matrices
+# 
+# Receives a nxn matrix
+#
+# Output: Upper and Lower Matrix
+#
+
+
+def gaussian_elimination(matrix):
+    Upper_matrix = np.copy(matrix)
+    #Lower_matrix = np.identity(matrix.shape[0])
+    for i in range(1,Upper_matrix.shape[0]):                                         # Starting with the row[1] (second row)
+        pivot = Upper_matrix[i-1][i-1].tolist()
+        for j in range(i,Upper_matrix.shape[0]):
+            divisor_factor = Upper_matrix[j][i-1]/pivot
+
+            for k in range(Upper_matrix.shape[0]):
+                Upper_matrix[j][k] = Upper_matrix[j][k] - Upper_matrix[i-1][k]*divisor_factor
+    
+    return Upper_matrix
+
